@@ -194,9 +194,10 @@ def create_line_collection(net, lines=None, line_geodata=None, bus_geodata=None,
                 if a in bus_geodata.index.values
                 and b in bus_geodata.index.values]
     else:
-        data = [(line_geodata.loc[line, "coords"],
-                 infofunc(line) if infofunc else [])
-                for line in lines if line in line_geodata.index.values]
+        data = [(line_geodata.loc[line, "coords"], infofunc(line) if infofunc else [])
+                if line in line_geodata.index.values
+                else ([[np.nan, np.nan]], [])
+                for line in lines]
 
     if len(data) == 0:
         return None
