@@ -6,6 +6,7 @@ from pandapower.plotting.simple_plot import *
 from pandapower.plotting.plotly import *
 from pandapower.plotting.geo import *
 from pandapower.plotting.to_html import to_html
+from pandapower.plotting.simple_topology import *
 
 import types
 from matplotlib.backend_bases import GraphicsContextBase, RendererBase
