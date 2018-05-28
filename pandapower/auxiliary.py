@@ -545,3 +545,10 @@ def _check_if_numba_is_installed(numba):
         numba = False
 
     return numba
+
+	
+def get_area_buses_by_index(net, index):
+    nogo = top.get_feeder_buses(net)
+    mg = top.create_nxgraph(net, nogobuses=nogo)
+    connected_components = list(top.connected_components(mg))
+    return connected_components[index]
