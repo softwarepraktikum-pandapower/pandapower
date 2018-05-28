@@ -487,3 +487,25 @@ def estimate_voltage_vector(net):
                 # parallel transformer, lv buses are already set from previous transformer
                 trafo_index.remove(tix)
     return res_bus
+
+def get_substation_buses(net, roots=None, mg=None):
+    if roots is None:
+        roots = set(net.ext_grid.bus.values)
+    if mg is None:
+        mg = create_nxgraph(net, respect_switches=False, include_lines=False,
+                            include_impedances=False)
+    substation_buses = []
+    all_substation_buses = set()
+    for slack in roots:
+        if slack in all_substation_buses:
+            continue
+        substation = set(connected_component(mg, slack))
+        substation_buses.append(substation)
+        all_substation_buses.update(substation)
+    return all_substation_buses, substation_buses
+
+
+def get_feeder_buses(net, roots=None):
+    all_substation_buses, _ = get_substation_buses(net, roots=roots)
+    feeder_buses = all_substation_buses & (set(net.line.from_bus) | set(net.line.to_bus))
+    return feeder_buses
