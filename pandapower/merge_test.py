@@ -1,7 +1,5 @@
 
-def merge_test():
-    """
-    """
-    a = [1, 2, 3]
-    for b in a:
-        print(b)
+def merge_test2():
+    b = [1, 2, 3]
+    for c in b:
+        print(c)
