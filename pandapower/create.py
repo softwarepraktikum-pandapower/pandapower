@@ -12,6 +12,7 @@ from pandapower.results import reset_results
 from pandapower.std_types import add_basic_std_types, load_std_type
 from pandapower import __version__
 
+test = 10
 
 def create_empty_network(name="", f_hz=50., sn_kva=1e3):
     """
